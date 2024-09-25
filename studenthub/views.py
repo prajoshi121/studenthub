@@ -2,7 +2,6 @@ import os
 from django.shortcuts import render
 from .models import Student
 import random
-import requests
 from datetime import datetime
 
 def home(request):
@@ -17,34 +16,8 @@ def home(request):
 
     random_quote = random.choice(quotes)
 
-    def get_weather(city="ahmedabad"):
-        api_key = os.getenv("WEATHER_API_KEY")  # Fetching API key from environment
-        base_url = "http://api.openweathermap.org/data/2.5/weather"
-        params = {
-            'q': city,
-            'appid': api_key,
-            'units': 'metric'
-        }
-
-        response = requests.get(base_url, params=params)
-
-        if response.status_code == 200:
-            data = response.json()
-            main = data['main']
-            weather = data['weather'][0]
-
-            temperature = main['temp']
-            description = weather['description']
-
-            return f"The temperature in {city}: {temperature}°C\nWeather Description: {description.capitalize()}"
-        else:
-            return "Unable to fetch weather data"
-
-    weather_info = get_weather("ahmedabad")
-
     information = {
         'random_quote': random_quote,
-        'weather_info': weather_info,
         'current_time': present.strftime('%Y-%m-%d %H:%M:%S'),
     }
 
@@ -62,34 +35,8 @@ def createstudent(request):
 
     random_quote = random.choice(quotes)
 
-    def get_weather(city="ahmedabad"):
-        api_key = os.getenv("WEATHER_API_KEY")  # Fetching API key from environment
-        base_url = "http://api.openweathermap.org/data/2.5/weather"
-        params = {
-            'q': city,
-            'appid': api_key,
-            'units': 'metric'
-        }
-
-        response = requests.get(base_url, params=params)
-
-        if response.status_code == 200:
-            data = response.json()
-            main = data['main']
-            weather = data['weather'][0]
-
-            temperature = main['temp']
-            description = weather['description']
-
-            return f"The temperature in {city}: {temperature}°C\nWeather Description: {description.capitalize()}"
-        else:
-            return "Unable to fetch weather data"
-
-    weather_info = get_weather("ahmedabad")
-
     information = {
         'random_quote': random_quote,
-        'weather_info': weather_info,
         'current_time': present.strftime('%Y-%m-%d %H:%M:%S'),
     }
 
@@ -114,36 +61,10 @@ def list_students(request):
 
     random_quote = random.choice(quotes)
 
-    def get_weather(city="ahmedabad"):
-        api_key = os.getenv("WEATHER_API_KEY")  # Fetching API key from environment
-        base_url = "http://api.openweathermap.org/data/2.5/weather"
-        params = {
-            'q': city,
-            'appid': api_key,
-            'units': 'metric'
-        }
-
-        response = requests.get(base_url, params=params)
-
-        if response.status_code == 200:
-            data = response.json()
-            main = data['main']
-            weather = data['weather'][0]
-
-            temperature = main['temp']
-            description = weather['description']
-
-            return f"The temperature in {city}: {temperature}°C\nWeather Description: {description.capitalize()}"
-        else:
-            return "Unable to fetch weather data"
-
-    weather_info = get_weather("ahmedabad")
-
     students = Student.objects.all()
 
     information = {
         'random_quote': random_quote,
-        'weather_info': weather_info,
         'current_time': present.strftime('%Y-%m-%d %H:%M:%S'),
         'students': students
     }
