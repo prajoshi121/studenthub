@@ -34,20 +34,10 @@
             <p>"{{ random_quote }}"</p>
         </div>
 
-        <div class="weather-info">
-            <h2>Weather Information:</h2>
-            <p>{{ weather_info }}</p>
-        </div>
-
-        <div class="current-time">
-            <h2>Current Time:</h2>
-            <p>{{ current_time }}</p>
-        </div>
-
         <div class="form-container">
             <h2>Student Registration Form</h2>
-            <form  method="POST">
-                {% csrf_token%}
+            <form method="POST">
+                {% csrf_token %}
                 <label for="name">Name:</label>
                 <input type="text" id="name" name="name" required><br><br>
 

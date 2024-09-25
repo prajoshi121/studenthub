@@ -1,8 +1,9 @@
+import os
 from django.shortcuts import render
 from .models import Student
 import random
 import requests
-from datetime import datetime 
+from datetime import datetime
 
 def home(request):
     present = datetime.now()
@@ -16,7 +17,8 @@ def home(request):
 
     random_quote = random.choice(quotes)
 
-    def get_weather(api_key, city="ahmedabad"):
+    def get_weather(city="ahmedabad"):
+        api_key = os.getenv("WEATHER_API_KEY")  # Fetching API key from environment
         base_url = "http://api.openweathermap.org/data/2.5/weather"
         params = {
             'q': city,
@@ -38,19 +40,17 @@ def home(request):
         else:
             return "Unable to fetch weather data"
 
-    api_key = "eaee87bd42ef48509708a853a24f1a26"
-    weather_info = get_weather(api_key, "ahmedabad")
+    weather_info = get_weather("ahmedabad")
 
     information = {
         'random_quote': random_quote,
         'weather_info': weather_info,
-        'current_time': present.strftime('%Y-%m-%d %H:%M:%S'),  
+        'current_time': present.strftime('%Y-%m-%d %H:%M:%S'),
     }
 
     return render(request, 'studenthub/home.html', information)
 
 def createstudent(request):
-
     present = datetime.now()
 
     quotes = [
@@ -62,7 +62,8 @@ def createstudent(request):
 
     random_quote = random.choice(quotes)
 
-    def get_weather(api_key, city="ahmedabad"):
+    def get_weather(city="ahmedabad"):
+        api_key = os.getenv("WEATHER_API_KEY")  # Fetching API key from environment
         base_url = "http://api.openweathermap.org/data/2.5/weather"
         params = {
             'q': city,
@@ -84,17 +85,15 @@ def createstudent(request):
         else:
             return "Unable to fetch weather data"
 
-    api_key = "eaee87bd42ef48509708a853a24f1a26"
-    weather_info = get_weather(api_key, "ahmedabad")
+    weather_info = get_weather("ahmedabad")
 
     information = {
         'random_quote': random_quote,
         'weather_info': weather_info,
-        'current_time': present.strftime('%Y-%m-%d %H:%M:%S'),  
+        'current_time': present.strftime('%Y-%m-%d %H:%M:%S'),
     }
 
-    if request.method=='POST':
-
+    if request.method == 'POST':
         name = request.POST.get('name')
         email = request.POST.get('email')
         mobile_number = request.POST.get('mobile_number')
@@ -104,7 +103,6 @@ def createstudent(request):
     return render(request, 'studenthub/register.html', information)
 
 def list_students(request):
-
     present = datetime.now()
 
     quotes = [
@@ -116,7 +114,8 @@ def list_students(request):
 
     random_quote = random.choice(quotes)
 
-    def get_weather(api_key, city="ahmedabad"):
+    def get_weather(city="ahmedabad"):
+        api_key = os.getenv("WEATHER_API_KEY")  # Fetching API key from environment
         base_url = "http://api.openweathermap.org/data/2.5/weather"
         params = {
             'q': city,
@@ -138,22 +137,15 @@ def list_students(request):
         else:
             return "Unable to fetch weather data"
 
-    api_key = "eaee87bd42ef48509708a853a24f1a26"
-    weather_info = get_weather(api_key, "ahmedabad")
+    weather_info = get_weather("ahmedabad")
 
     students = Student.objects.all()
-
 
     information = {
         'random_quote': random_quote,
         'weather_info': weather_info,
-        'current_time': present.strftime('%Y-%m-%d %H:%M:%S'),  
-        'students':students
+        'current_time': present.strftime('%Y-%m-%d %H:%M:%S'),
+        'students': students
     }
 
     return render(request, 'studenthub/students.html', information)
-
-
-    
-
-
