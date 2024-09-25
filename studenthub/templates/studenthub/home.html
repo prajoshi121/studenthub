@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Student Portal</title>
+    {% load static %}
+    <link rel="stylesheet" href="{% static 'studenthub/style.css' %}">
+</head>
+<body>
+
+    <header>
+        <nav class="navbar">
+            <div class="container">
+                <div class="logo">
+                    <a href="#">Student Portal</a>
+                </div>
+                <ul class="nav-links">
+                    <li><a href="#">Home</a></li>
+                    <li><a href="/register">Register</a></li>
+                    <li><a href="/students">Students</a></li>
+                    <li><a href="#">Contact Us</a></li>
+                </ul>
+            </div>
+        </nav>
+    </header>
+
+    <div class="content">
+        <h1>Welcome to the Student Portal</h1>
+        <p>Register your details quickly and stay connected!</p>
+
+        <div class="quote">
+            <h2>Quote of the Day:</h2>
+            <p>"{{ random_quote }}"</p>
+        </div>
+
+        <div class="weather-info">
+            <h2>Weather Information:</h2>
+            <p>{{ weather_info }}</p>
+        </div>
+
+        <div class="current-time">
+            <h2>Current Time:</h2>
+            <p>{{ current_time }}</p>
+        </div>
+    </div>
+
+    <footer>
+        <div class="footer-container">
+            <p>&copy; 2024 Student Portal. All rights reserved.</p>
+        </div>
+    </footer>
+
+</body>
+</html>

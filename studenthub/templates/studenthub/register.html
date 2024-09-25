@@ -1,0 +1,72 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Student Portal</title>
+    {% load static %}
+    <link rel="stylesheet" href="{% static 'studenthub/style.css' %}">
+</head>
+<body>
+
+    <header>
+        <nav class="navbar">
+            <div class="container">
+                <div class="logo">
+                    <a href="#">Student Portal</a>
+                </div>
+                <ul class="nav-links">
+                    <li><a href="/">Home</a></li>
+                    <li><a href="#">Register</a></li>
+                    <li><a href="/students">Students</a></li>
+                    <li><a href="#">Contact Us</a></li>
+                </ul>
+            </div>
+        </nav>
+    </header>
+
+    <div class="content">
+        <h1>Register New Student</h1>
+        <p>To create your student profile, please enter your name, email, and mobile number in the fields below.</p>
+
+        <div class="quote">
+            <h2>Quote of the Day:</h2>
+            <p>"{{ random_quote }}"</p>
+        </div>
+
+        <div class="weather-info">
+            <h2>Weather Information:</h2>
+            <p>{{ weather_info }}</p>
+        </div>
+
+        <div class="current-time">
+            <h2>Current Time:</h2>
+            <p>{{ current_time }}</p>
+        </div>
+
+        <div class="form-container">
+            <h2>Student Registration Form</h2>
+            <form  method="POST">
+                {% csrf_token%}
+                <label for="name">Name:</label>
+                <input type="text" id="name" name="name" required><br><br>
+
+                <label for="email">Email:</label>
+                <input type="email" id="email" name="email" required><br><br>
+
+                <label for="mobile_number">Mobile Number:</label>
+                <input type="text" id="mobile_number" name="mobile_number" required><br><br>
+
+                <button type="submit">Submit</button>
+            </form>
+        </div>
+    </div>
+
+    <footer>
+        <div class="footer-container">
+            <p>&copy; 2024 Student Portal. All rights reserved.</p>
+        </div>
+    </footer>
+
+</body>
+</html>
